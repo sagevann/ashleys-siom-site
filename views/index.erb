@@ -1,14 +1,14 @@
 <style>
 
 .background-image.china{
-  transition: background-position 0.75s ease;
-   background-position: -5700px -2500px;
+  transition: background-position 2.25s ease;
+   background-position: -5500px -2500px;
    background-size: 8000px 5416px;
 }
 
 .background-image.usa{
-   transition: background-position 0.75s ease;
-   background-position: -500px -1950px;
+   transition: background-position 2.25s ease;
+   background-position: -400px -1950px;
   background-size: 8000px 5416px;
 }
 
@@ -23,12 +23,12 @@
 .background-image.michigan{
    transition: background-position 1.75s ease;
                
-   background-position: -1300px -2000px;
+   background-position: -1200px -2000px;
    background-size: 8000px 5416px;
 
 }
 .seattle{
-   transition: background-position 0.75s ease;
+   transition: background-position 2.75s ease;
    background-position: -200px -300px, center;
 }
 
@@ -59,9 +59,11 @@
 }
 
 .images{
-  margin-top: 20px;
+  margin-top: 10px;
+  background: rgba(255,255,255, 0.7);
 }
-
+.introduction{ background: rgba(255,255,255, 0.4); height: 500px;}
+h2{ font-size: 18px;}
 </style>
 <div hidden>
 <button id="michigan" class="btn btn-default">Michigan</button>
@@ -72,11 +74,11 @@
 
 <div class="container">
   <h1 class="gratz">Congratulations!</h1>
-  <div class="col-md-8 introduction">
+  <div class="col-md-6 introduction">
     <h2 class="intro-1">It was a long, arduous journey.</h2>
     <h2 class="intro-2" hidden>From the blueberry fields of Michigan.</h2>
     <h2 class="intro-3" hidden>To the cities and mountains of China</h2>
-    <h2 class="intro-4" hidden>To the emerald city and the long apprenticeship at SIOM</h2>
+    <h2 class="intro-4" hidden>To the emerald city and the years of study,</h2>
     <div class="intro-5" hidden>
       <h2 class="intro-6" hidden>Through it all you kept your eyes on the journey, and in the end </h2>
       <h2 class="intro-7" hidden>You succeeded. We saw you succeed through hardship.</h2>
@@ -87,9 +89,10 @@
     <h2 class="intro-11" hidden>I hope you will accept this gift of an internet presence for all your hard work</h2>
     <h2 class="intro-12" hidden>-Sage</h2>
   </div>
-  <div class="col-md-4 images">
+  <div class="col-md-2">..</div>
+    <div class="col-md-4 images">
 
-      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" hidden>
       <!-- Indicators -->
       <ol class="carousel-indicators">
         <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -104,6 +107,12 @@
     
           <div class="carousel-caption">
 
+          </div>
+        </div>
+         <div class="item">
+         <img src="/images/seattle.png" class='img-thumbnail'></img>
+          <div class="carousel-caption">
+            
           </div>
         </div>
         <div class="item">
@@ -129,41 +138,65 @@
 </div>
 <script>
 
+var animation = { "start": { }}
+
 var timings = { "intro-2": 1000,
-              "intro-3": 1000,
-              "intro-4": 1000,
-              "intro-5": 100,
-              "intro-6": 750, "intro-7": 750, "intro-8": 750,"intro-9": 750, "intro-10": 750
+                "intro-3": 1000,
+                "intro-4": 1000,
+                "intro-5": 100,
+                "intro-6": 750, "intro-7": 750, "intro-8": 750,"intro-9": 750, "intro-10": 750
               
               }
 
 function zoomMap(){
-
   $('.background-image').addClass('center')
   setTimeout(moveToMichigan, 600)
 }
 
 function moveToMichigan(){
-   $('.background-image').removeClass('china usa').addClass('michigan')
+   $('.background-image').removeClass('china center usa').addClass('michigan')
 }
 
 function moveToChina(){
-   $('.background-image').removeClass('usa michigan').addClass('china')
+   $('.background-image').removeClass('usa center michigan').addClass('china')
+   setTimeout( function(){$('.carousel').carousel('next')}, 1000);
+   setTimeout( seattle, 6000)
 }
 
 function moveToSeattle(){
-   $('.background-image').removeClass('china michigan').addClass('usa')
+   $('.background-image').removeClass('china center michigan').addClass('usa')
+   setTimeout( seattleAnim, 2000)
+}
+
+function michigan(){
+  zoomMap();
+  $('.carousel').fadeIn(2000)
+  setTimeout(china, 5000)
+}
+
+function china(){
+  $('.intro-3').fadeIn(1000, moveToChina)
+}
+
+function seattle(){
+  
+  $('.intro-4').fadeIn(1000,moveToSeattle)
+}
+
+function seattleAnim(){
+
+  for( var a = 5; a <= 11; a++){
+    var intro = '.intro-' + a
+    $(intro).fadeIn(1000 + a * 500)
+  }
 }
 
 $(function(){
-  for( var i = 2; i <= 11; i++){
-    var intro = '.intro-'+i
-    console.log('intor is ' + intro)
-    $(intro).fadeIn(5000)
-  }
+    $('.carousel').carousel('pause');
 
-  $('#china').click(function(e){$('.background-image').removeClass('usa michigan').addClass('china')})
-  $('#seattle').click(function(e){ $('.background-image').removeClass('china michigan').addClass('usa')})
-  $('#michigan').click(function(e){ $('.background-image').removeClass('china usa').addClass('michigan')})
+    $('.intro-2').fadeIn(1000, michigan )
+
+
+
 })
 </script>
