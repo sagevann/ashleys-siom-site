@@ -1,0 +1,169 @@
+<style>
+
+.background-image.china{
+  transition: background-position 0.75s ease;
+   background-position: -5700px -2500px;
+   background-size: 8000px 5416px;
+}
+
+.background-image.usa{
+   transition: background-position 0.75s ease;
+   background-position: -500px -1950px;
+  background-size: 8000px 5416px;
+}
+
+.background-image.center{
+  transition: background-position 0.5s ease,
+              background-size 0.5s ease;
+
+   background-position: -2500px -2050px, center;
+   background-size: 8000px 5416px;
+}
+
+.background-image.michigan{
+   transition: background-position 1.75s ease;
+               
+   background-position: -1300px -2000px;
+   background-size: 8000px 5416px;
+
+}
+.seattle{
+   transition: background-position 0.75s ease;
+   background-position: -200px -300px, center;
+}
+
+
+.background-image {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+
+  display: block;
+  background-image: url('/images/Vintage-World-Map1.jpg');
+  background-position: -10px -50px;
+  background-size: 1600px 1083px;
+  background-repeat: repeat-x;
+  width: 8500px;
+  height: 8000px;
+
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+  filter: blur(3px);
+}
+
+.gratz{
+  font-size: 7em;
+}
+
+.images{
+  margin-top: 20px;
+}
+
+</style>
+<div hidden>
+<button id="michigan" class="btn btn-default">Michigan</button>
+<button id="china" class="btn btn-default">China</button>
+<button id="seattle" class="btn btn-default">Seattle</button>
+</div>
+<div class="background-image"></div>
+
+<div class="container">
+  <h1 class="gratz">Congratulations!</h1>
+  <div class="col-md-8 introduction">
+    <h2 class="intro-1">It was a long, arduous journey.</h2>
+    <h2 class="intro-2" hidden>From the blueberry fields of Michigan.</h2>
+    <h2 class="intro-3" hidden>To the cities and mountains of China</h2>
+    <h2 class="intro-4" hidden>To the emerald city and the long apprenticeship at SIOM</h2>
+    <div class="intro-5" hidden>
+      <h2 class="intro-6" hidden>Through it all you kept your eyes on the journey, and in the end </h2>
+      <h2 class="intro-7" hidden>You succeeded. We saw you succeed through hardship.</h2>
+      <h2 class="intro-8" hidden>Through doubt,</h2>
+      <h2 class="intro-9" hidden>Through hours and hours and hours of study,</h2>
+      <h2 class="intro-10" hidden>No one is more deserving of a praise for their hard work.</h2>
+    </div>
+    <h2 class="intro-11" hidden>I hope you will accept this gift of an internet presence for all your hard work</h2>
+    <h2 class="intro-12" hidden>-Sage</h2>
+  </div>
+  <div class="col-md-4 images">
+
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="/images/michigan.png" class='img-thumbnail'></img>
+    
+          <div class="carousel-caption">
+
+          </div>
+        </div>
+        <div class="item">
+         <img src="/images/ash_herbs.jpg" class='img-thumbnail'></img>
+          <div class="carousel-caption">
+            
+          </div>
+        </div>
+        
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+   
+
+  </div>
+</div>
+<script>
+
+var timings = { "intro-2": 1000,
+              "intro-3": 1000,
+              "intro-4": 1000,
+              "intro-5": 100,
+              "intro-6": 750, "intro-7": 750, "intro-8": 750,"intro-9": 750, "intro-10": 750
+              
+              }
+
+function zoomMap(){
+
+  $('.background-image').addClass('center')
+  setTimeout(moveToMichigan, 600)
+}
+
+function moveToMichigan(){
+   $('.background-image').removeClass('china usa').addClass('michigan')
+}
+
+function moveToChina(){
+   $('.background-image').removeClass('usa michigan').addClass('china')
+}
+
+function moveToSeattle(){
+   $('.background-image').removeClass('china michigan').addClass('usa')
+}
+
+$(function(){
+  for( var i = 2; i <= 11; i++){
+    var intro = '.intro-'+i
+    console.log('intor is ' + intro)
+    $(intro).fadeIn(5000)
+  }
+
+  $('#china').click(function(e){$('.background-image').removeClass('usa michigan').addClass('china')})
+  $('#seattle').click(function(e){ $('.background-image').removeClass('china michigan').addClass('usa')})
+  $('#michigan').click(function(e){ $('.background-image').removeClass('china usa').addClass('michigan')})
+})
+</script>
